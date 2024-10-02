@@ -1,0 +1,22 @@
+package com.darwinfont.presta_products.domain.prestaShop.supplier;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PrestaSupplierRes {
+    public Integer id;
+    @JsonProperty(value = "link_rewrite")
+    private String linkRewrite;
+    private String name;
+    private Integer active;
+    private String description;
+    @JsonProperty(value = "date_add")
+    private String dateAdd;
+    @JsonProperty(value = "date_upd")
+    private String dateUpd;
+}

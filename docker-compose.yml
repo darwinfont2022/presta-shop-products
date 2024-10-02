@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mysql:
+    container_name: presta-mysql
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: prestashop
+    networks:
+      - prestashop_network
+    volumes:
+      - sqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  prestashop:
+    container_name: prestashop
+    image: prestashop/prestashop:latest
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    environment:
+      ADMIN_MAIL: darwinfont2022@gmail.com
+      ADMIN_PASSWD: prestademo
+      DB_SERVER: presta-mysql
+      DB_NAME: prestashop
+      DB_USER: root
+      DB_PASSWD: admin
+      PS_FOLDER_ADMIN: admin4577
+      PS_FOLDER_INSTALL: install4577
+      PS_INSTALL_AUTO: 1
+      PS_DOMAIN: localhost:8080
+    networks:
+      - prestashop_network
+    volumes:
+      - psdata:/var/www/html
+networks:
+  prestashop_network:
+volumes:
+  psdata:
+  sqldata:
